@@ -16,9 +16,12 @@
 				width: 100%;
 				text-align: center;
 				vertical-align: middle;
+				text-wrap:normal;
 			}
 			#quote{
-				line-height: 400px;
+				position:relative;
+				top:50px;
+				font-size: 30px;
 			}
 			select option{
 				text-transform:capitalize;
@@ -112,7 +115,7 @@
 				//alert("over");
 			}
 			var obj = quotes[i][j];
-	    	$("#quote").html(obj["quote"]+"-"+obj["author"]);
+	    	$("#quote").html(obj["quote"]+"<br/>~~"+obj["author"]);
     	}		
 	</script>	
 </html>
