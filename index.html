@@ -12,7 +12,7 @@
 		<script src="js/quotes.js"></script>
 		<style type="text/css">
 			#content{
-				height:550px;
+				height:350px;
 				width: 100%;
 				text-align: center;
 				vertical-align: middle;
@@ -26,7 +26,18 @@
 				font-size: 30px;
 			}
 			select option{
-				text-transform:capitalize;
+				font-size:18px;
+			}
+			#pgTitle{
+				position:relative;
+				display: block;
+				text-align: center;
+				left:-15px;
+				font-size: 25px;
+			}
+			.author{
+				text-transform: capitalize;
+				font-style: italic;
 			}
 		</style>
 	</head>
@@ -61,7 +72,7 @@
 <!-- Home -->
 		<div data-role="page" id="page1">
 		    <div data-theme="" data-role="header" data-position="fixed">
-		    <h3>Quotable Quotes</h3>
+		    <span id="pgTitle">Quotes</span>
 		            <label for="quotesMenu"></label>
 		            <select id="quotesMenu" name="">
 <!-- 		                <option value="option1">
@@ -69,7 +80,7 @@
 </option> -->
 		            </select>
 		    </div>
-		    <div data-role="content" id="content">
+		    <div id="content">
 		    	<div id="quote"></div>
 		    </div>
 		</div>
@@ -77,7 +88,7 @@
 	<script>
 		var i=0;
 		var j=0;
-		var options=["Ability","Achievement","attitude","brave","character","courage","determination","enthusiasm","inspirational","leadership","love","motivational","opportunity","perseverance"];
+		var options=["Ability","Achievement","Attitude","Brave","Character","Courage","Determination","Enthusiasm","Inspirational","Leadership","Love","Motivational","Opportunity","Perseverance"];
 		var quotes = [ability,achievement,attitude,brave,character,courage,determination,enthusiasm,inspirational,leadership,love,motivational,opportunity,perseverance];
 		// Bind the swipeleftHandler callback function to the swipe event on div.box
 		$.each(options,function(i){
@@ -109,15 +120,13 @@
 
     	function updateContent(){	    		
 			if(j<0){
-				j=0;
-				//alert("negative");
-			}
-			if(j>quotes[i].length){
 				j = quotes[i].length-1;
-				//alert("over");
+			}
+			if(j>=quotes[i].length){
+				j = 0;
 			}
 			var obj = quotes[i][j];
-	    	$("#quote").html(obj["quote"]+"<br/>~~"+obj["author"]);
+	    	$("#quote").html(obj["quote"]+"<br/>~~<span class='author'>"+obj["author"]+"</span>");
     	}		
 	</script>	
 </html>
