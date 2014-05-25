@@ -12,7 +12,7 @@
 		<script src="js/quotes.js"></script>
 		<style type="text/css">
 			#content{
-				height: 1024px;
+				height: auto;
 				width: 100%;
 				text-align: center;
 				vertical-align: middle;
@@ -135,13 +135,13 @@
 		updateContent(j);
 		$('#qCat').html(options[j]);
 
-		$("#content").on("swipeleft", function(event){
+		$("#page1").on("swipeleft", function(event){
 			//console.log("swipeleft");
 			j++;
 			updateContent();
 		});
 
-		$("#content").on("swiperight", function(event){
+		$("#page1").on("swiperight", function(event){
 			//console.log("swiperight");
 			j--;
 			updateContent();
