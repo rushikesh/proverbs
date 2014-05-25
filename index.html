@@ -28,12 +28,15 @@
 			select option{
 				font-size:18px;
 			}
-			#pgTitle{
+			.hdrTitle{
 				position:relative;
 				display: block;
 				text-align: center;
-				left:-15px;
+				/*left:-15px;*/
 				font-size: 25px;
+			}
+			#qCat{
+				font-size: 20px;
 			}
 			.author{
 				text-transform: capitalize;
@@ -71,14 +74,21 @@
 </div> -->
 <!-- Home -->
 		<div data-role="page" id="page1">
+
+			<div data-role="panel" data-position="left" data-position-fixed="true" data-display="overlay" id="nav-panel"> 
+			  <h2>Quote Categories</h2>
+			  <ol id="qlist" data-role="listview">
+
+			  </ol>
+			</div>
+
 		    <div data-theme="" data-role="header" data-position="fixed">
-		    <span id="pgTitle">Quotes</span>
-		            <label for="quotesMenu"></label>
-		            <select id="quotesMenu" name="">
-<!-- 		                <option value="option1">
-    Option 1
-</option> -->
-		            </select>
+			    <a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>
+			    <span id="pgTitle" class="hdrTitle">Quotable Quotes</span>
+			    <div id="qCat" class="hdrTitle"></div>
+					<!-- 	<label for="quotesMenu"></label>
+							<select id="quotesMenu" name="">
+							</select> -->
 		    </div>
 		    <div id="content">
 		    	<div id="quote"></div>
@@ -91,23 +101,35 @@
 		var options=["Beauty","Dreams","Failure","Attitude","Brave","Character","Courage","Travel","War","Inspirational","Leadership","Love","Motivational"];
 		var quotes = [beauty,dreams,failure ,attitude ,brave ,character ,courage ,travel ,war ,inspirational ,leadership ,love ,motivational];
 		// Bind the swipeleftHandler callback function to the swipe event on div.box
+		/*
 		$.each(options,function(i){
 			var ele = document.createElement('option');
 			ele.value = i;
 			ele.innerHTML = options[i];
 			$("#quotesMenu").append(ele);
 		});
+		*/
+		$.each(options,function(i){
+			var li = document.createElement('li');
+			var ele = document.createElement('a');
+			ele.href="#";
+			ele.id = i;
+			ele.innerHTML = options[i];
+			$(li).append(ele);
+			$("#qlist").append(li);
+		});		
 
 		updateContent(j);
+		$('#qCat').html(options[j]);
 
 		$("#content").on("swipeleft", function(event){
-			console.log("swipeleft");
+			//console.log("swipeleft");
 			j++;
 			updateContent();
 		});
 
 		$("#content").on("swiperight", function(event){
-			console.log("swiperight");
+			//console.log("swiperight");
 			j--;
 			updateContent();
 		});
@@ -117,6 +139,15 @@
 			j= 0;
 			updateContent(j);
     	});
+
+		$('#qlist a').on('click',function(){
+			i = $(this).attr('id');
+			///console.dir(this);
+			j= 0;
+			$('#qCat').html(options[i]);
+			updateContent(j);
+			$( "#nav-panel" ).panel( "close" );
+    	});    	
 
     	function updateContent(){	    		
 			if(j<0){
